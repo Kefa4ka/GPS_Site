@@ -38,8 +38,13 @@ function handleError(error) {
     alert('Неможливо отримати дані геолокації');
 }
 
-if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(updateSpeed, handleError, { enableHighAccuracy: true });
+setInterval(() => {
+    navigator.geolocation.getCurrentPosition(updateSpeed, handleError, {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 1000
+    });
+}, 400);
 } else {
     alert('Геолокація не підтримується на цьому пристрої');
 }
